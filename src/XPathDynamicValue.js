@@ -26,7 +26,7 @@ class XPath {
         selectedString = selectedString.replace(/xmlns=".*?"/, '' );
       }
       if (this.prettyprint){
-        selectedString = format(selectedString)
+        selectedString = format(selectedString, {collapseContent: true})
       }
       return selectedString
     }
