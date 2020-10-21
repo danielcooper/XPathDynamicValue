@@ -1,0 +1,31 @@
+---
+name: "tagged-release"
+
+on:
+  push:
+     branchs:
+      - master 
+
+jobs:
+  tagged-release:
+    name: "Tagged Release"
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js 
+        uses: actions/setup-node@v1
+      - run: npm install
+      - name: "Build"
+        run: |
+          npm run build
+          cp README.md LICENSE ./dist/
+          ln -s ./dist/ com.14lines.Paw.XPathDynamicValue
+          tar cvz -h -f XPathDynamicValue.tar.gz ./com.14lines.Paw.XPathDynamicValue/
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          automatic_release_tag: "latest"
+          files: |
+            XPathDynamicValue.tar.gz
