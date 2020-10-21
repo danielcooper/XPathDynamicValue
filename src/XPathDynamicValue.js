@@ -1,5 +1,6 @@
 const xpath = require('xpath');
 const DOMParser = require('xmldom').DOMParser;
+const format = require('xml-formatter');
 
 class XPath {
   static identifier = 'com.14lines.Paw.XPathDynamicValue'
@@ -8,7 +9,8 @@ class XPath {
   static inputs = [
     InputField("req", "Source Request", "Request"),
     InputField("xpath", "XPath", "String"),
-    InputField("removexmlns", "Remove namespace from output", "Checkbox")
+    InputField("removexmlns", "Remove namespace from output", "Checkbox"),
+    InputField("prettyprint", "Pretty Print", "Checkbox")
   ]
 
   evaluate(context) {
@@ -22,6 +24,9 @@ class XPath {
       var selectedString =  selected.toString()
       if (this.removexmlns){
         selectedString = selectedString.replace(/xmlns=".*?"/, '' );
+      }
+      if (this.prettyprint){
+        selectedString = format(selectedString)
       }
       return selectedString
     }
