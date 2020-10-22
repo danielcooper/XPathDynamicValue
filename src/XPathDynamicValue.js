@@ -10,8 +10,8 @@ class XPath {
     InputField("req", "Source Request", "Request"),
     InputField("xpath", "XPath", "String"),
     InputField("removexmlns", "Remove namespace from output", "Checkbox"),
-    InputField("prettyprint", "Pretty Print", "Checkbox")
-  ]
+    InputField("prettyprint", "Pretty Print", "Checkbox"),
+    InputField("namespaces", "Namespaces", "KeyValueList", {"keyName":"namespace", "valueName":"url"})  ]
 
   evaluate(context) {
     if (this.xpath === ""){
@@ -19,7 +19,17 @@ class XPath {
     }
     const lastBody = this.req.getLastExchange().responseBody
     const documentNode = new DOMParser().parseFromString(lastBody, 'text/xml')
-    const selected = xpath.select(this.xpath, documentNode)
+
+    var selected = ""
+    var namespaces = this.namespaces.reduce(function(map, obj) {
+        if (obj[2]){
+          map[obj[0]] = obj[1];
+        }
+        return map;
+      }, {});
+    
+    selected = xpath.useNamespaces(namespaces)(this.xpath, documentNode);
+
     if (selected){
       var selectedString =  selected.toString()
       if (this.removexmlns){
