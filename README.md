@@ -1,4 +1,6 @@
-Paw extention for parsing a response with XPath.
+# Paw extention for parsing a response with XPath.
+
+![image](https://user-images.githubusercontent.com/22127/96973456-cfcddd00-150f-11eb-8f98-110f9c9f218f.png)
 
 ## Installation
 
