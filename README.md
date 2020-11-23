@@ -4,4 +4,6 @@
 
 ## Installation
 
-Either clone this repo and run `make install` or place an extracted release in `$(HOME)/Library/Containers/com.luckymarmot.Paw/Data/Library/Application Support/com.luckymarmot.Paw/Extensions/`
+Either clone this repo and run `make install` or place an extracted release in your Paw extensions folder.
+
+You can find the extension folder by going to the Preferences ‣ Extensions in Paw and hit the Open Extensions Directory button.
