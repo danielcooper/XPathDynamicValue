@@ -2,6 +2,7 @@ identifier=com.14lines.Paw.XPathDynamicValue
 extensions_dir=$(HOME)/Library/Containers/com.luckymarmot.Paw/Data/Library/Application Support/com.luckymarmot.Paw/Extensions/
 
 build:
+	yarn
 	npm run build
 	cp README.md LICENSE ./dist/
 
